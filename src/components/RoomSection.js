@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
 
 import Text from './Text';
+import Icon from './Icon';
 
-const RoomSection = ({ label, children }) => (
+const RoomSection = ({ label, children, onClickEdit }) => (
   <View style={styles.container}>
     <View style={styles.header}>
       <Text>{label}</Text>
-      <AntDesign name="edit" size={24} color="black" />
+      <Icon name="square-edit-outline" color="black" onPress={onClickEdit} />
     </View>
     <View style={styles.body}>{children}</View>
   </View>

@@ -4,10 +4,10 @@ import { Text as TextNE, makeStyles } from 'react-native-elements';
 const Text = (props) => {
   const styles = useStyles(props);
 
-  const { children } = props;
+  const { children, style } = props;
 
   return (
-    <TextNE style={styles}>{children}</TextNE>
+    <TextNE style={[styles, style]}>{children}</TextNE>
   );
 }
 

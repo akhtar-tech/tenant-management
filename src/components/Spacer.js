@@ -10,10 +10,14 @@ const Spacer = (props) => {
   );
 };
 
-const useStyles = makeStyles((theme, props) => ({
-  container: {
-    ...props.horizontal ? { width: 10 } : { height: 10 }
-  },
-}));
+const useStyles = makeStyles((theme, props) => {
+  const space = (props.space || 1) * 10;
+
+  return ({
+    container: {
+      ...props.horizontal ? { width: space } : { height: space }
+    },
+  });
+});
 
 export default Spacer;

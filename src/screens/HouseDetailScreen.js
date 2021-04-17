@@ -1,14 +1,27 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
 import { FAB, Portal, Provider } from 'react-native-paper';
+import { makeStyles } from 'react-native-elements';
 
-import { HouseDetailHeader, RoomList, Spacer } from '../components';
+import { HouseDetailHeader, RoomList, Spacer, Dialog, RentDetail } from '../components';
 import { houses, rooms } from '../mockData';
 
 const HouseDetailScreen = ({ route }) => {
-  const [state, setState] = React.useState({ open: false });
+  const styles = useStyles();
+  const [state, setState] = useState({ open: false });
+  const [showDeleteIcon, setShowDeleteIcon] = useState(false);
+  const [showInformationDialog, setShowInformationDialog] = useState(false);
 
   const onStateChange = ({ open }) => setState({ open });
+
+  const openInformationDialog = () => setShowInformationDialog(true);
+  const hideInformationDialog = () => setShowInformationDialog(false);
+  const handleOpenInformationDialog = () => {
+    // setLoading(true);
+    setTimeout(() => {
+      // setLoading(false);
+      openInformationDialog();
+    }, 2000);
+  }
 
   const { open } = state;
   const { id, image, totalRooms, remainingRooms } = houses.find(({ id }) => id === route.params.houseId);
@@ -23,7 +36,11 @@ const HouseDetailScreen = ({ route }) => {
           remainingRooms={remainingRooms}
           />
         <Spacer />
-        <RoomList rooms={filteredRooms} />
+        <RoomList
+          rooms={filteredRooms}
+          showDeleteIcon={showDeleteIcon}
+          cancelDeleteAction={() => setShowDeleteIcon(false)}
+        />
         <FAB.Group
           open={open}
           icon={open ? 'window-close' : 'dots-vertical'}
@@ -34,32 +51,39 @@ const HouseDetailScreen = ({ route }) => {
               onPress: () => console.log('Add room pressed'),
             },
             {
-              icon: 'pencil',
-              label: 'Edit room',
-              onPress: () => console.log('Edit room pressed'),
+              icon: 'delete',
+              label: 'Delete room',
+              onPress: () => setShowDeleteIcon(true),
             },
             {
               icon: 'calculator-variant',
-              label: 'Check rent',
+              label: 'Calculate rent',
               small: false,
-              onPress: () => console.log('Check rent pressed'),
+              onPress: handleOpenInformationDialog,
             },
           ]}
           onStateChange={onStateChange}
+          fabStyle={styles.fabIcon}
         />
       </Portal>
+      <Dialog>
+        <Dialog.Information
+          visible={showInformationDialog}
+          hideDialog={hideInformationDialog}
+          title="Rent Information"
+        >
+          <RentDetail label="H1R1" rent={2200} electricity={745} containerStyle={{ backgroundColor: '#72a3f2' }} />
+          <RentDetail label="H1R2" rent={2000} electricity={805} containerStyle={{ backgroundColor: '#6d8cbd' }} />
+        </Dialog.Information>
+      </Dialog>
     </Provider>
   );
 };
 
-const styles = StyleSheet.create({
-  fab: {
-    position: 'absolute',
-    margin: 16,
-    right: 0,
-    bottom: 0,
-    zIndex: 99,
+const useStyles = makeStyles((theme, props) => ({
+  fabIcon: {
+    backgroundColor: theme.colors.primary,
   },
-})
+}));
 
 export default HouseDetailScreen;

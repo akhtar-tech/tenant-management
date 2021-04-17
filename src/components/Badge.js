@@ -1,25 +1,42 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text, Badge as BadgeRNE } from 'react-native-elements'
+import { View } from 'react-native';
+import { makeStyles } from 'react-native-elements';
+import { Badge as _Badge } from 'react-native-paper';
 
-const Badge = ({ label, badgeCount, variant = 'primary' }) => {
+import Text from './Text';
+
+const Badge = (props) => {
+  const { label, badgeCount } = props;
+
+  const styles = useStyles(props);
+
   return (
     <View style={styles.container}>
       <Text>{label}</Text>
-      <BadgeRNE
-        status={variant}
-        value={badgeCount}
-        textStyle={{ fontSize: 18 }}
-        badgeStyle={{ paddingVertical: 15, paddingHorizontal: 5, borderRadius: 30, }}
-      />
+      <_Badge size={30} style={styles.badge}>{badgeCount}</_Badge>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-  },
+const useStyles = makeStyles((theme, props) => {
+  let backgroundColor = theme.colors.success;
+  let color = theme.colors.black;
+
+  if (props.variant === 'error') {
+    backgroundColor = theme.colors.danger;
+    color = theme.colors.white;
+  }
+
+  return ({
+    container: {
+      alignItems: 'center',
+    },
+    badge: {
+      alignSelf: 'center',
+      backgroundColor,
+      color,
+    },
+  });
 });
 
 export default Badge;
