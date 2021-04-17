@@ -17,22 +17,18 @@ const PlusButton = (props) => {
   );
 }
 
-const useStyles = makeStyles((theme, props) => {
-  console.log('theme =>', theme);
-
-  return ({
-    container: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: 80,
-      height: 80,
-      borderRadius: 40,
-      borderColor: 'white',
-      borderWidth: 10,
-      backgroundColor: theme.colors.primary,
-      bottom: 30,
-    },
-  });
-});
+const useStyles = makeStyles((theme, props) => ({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    borderColor: 'white',
+    borderWidth: 10,
+    backgroundColor: theme.colors.primary,
+    bottom: 30,
+  },
+}));
 
 export default PlusButton;
