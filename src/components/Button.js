@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button as ButtonRN, makeStyles } from 'react-native-elements';
 
 import Icon from './Icon';

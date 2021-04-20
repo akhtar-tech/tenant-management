@@ -9,7 +9,12 @@ import { PlusButton, Icon } from '../components';
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => (
-  <Tab.Navigator tabBarOptions={{ labelStyle: { fontSize: 14 } }}>
+  <Tab.Navigator
+    tabBarOptions={{
+      labelStyle: { fontSize: 14 },
+      keyboardHidesTabBar: true,
+    }}
+  >
     <Tab.Screen
       name={routes.HOUSE_LIST}
       component={HouseNavigator}
