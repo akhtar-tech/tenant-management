@@ -5,6 +5,7 @@ const routes = Object.freeze({
   ACTIVITY: 'Activity',
   ADD_HOUSE: 'AddHouse',
   ACCOUNT: 'Account',
+  MY_MESSAGES: 'MyMessages',
 });
 
 export default routes;

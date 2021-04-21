@@ -4,16 +4,25 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { makeStyles } from 'react-native-elements';
 
 const Icon = (props) => {
-  const { name, size, color, onPress, containerStyle, ...restProps } = props;
+  const {
+    name,
+    backgroundColor,
+    size = 24,
+    color = 'white',
+    onPress,
+    containerStyle,
+    ...restProps
+  } = props;
+
   const styles = useStyles(props);
 
   if (onPress) {
     return (
-      <TouchableOpacity onPress={onPress} style={[styles.container, containerStyle]}>
+      <TouchableOpacity onPress={onPress} style={[styles.container, containerStyle, { backgroundColor }]}>
         <MaterialCommunityIcons
           name={name}
-          size={size || 24}
-          color={color || 'white'}
+          size={size}
+          color={color}
           {...restProps}
         />
       </TouchableOpacity>
@@ -21,11 +30,11 @@ const Icon = (props) => {
   }
 
   return (
-    <View style={containerStyle}>
+    <View style={[containerStyle, { backgroundColor }]}>
       <MaterialCommunityIcons
         name={name}
-        size={size || 24}
-        color={color || 'white'}
+        size={size}
+        color={color}
         {...restProps}
       />
     </View>

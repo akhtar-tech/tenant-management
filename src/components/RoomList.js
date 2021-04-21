@@ -5,7 +5,7 @@ import { FAB, Portal, Provider } from 'react-native-paper';
 
 import { routes } from '../config';
 import Box from './Box';
-import Dialog from './Dialog';
+import Dialog from './dialog';
 import Icon from './Icon';
 
 const RoomList = (props) => {

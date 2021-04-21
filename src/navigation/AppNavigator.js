@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { routes } from '../config';
 import HouseNavigator from './HouseNavigator';
+import AccountNavigator from './AccountNavigator';
 import { AddHouseScreen, AccountScreen } from '../screens';
 import { PlusButton, Icon } from '../components';
 
@@ -34,7 +35,7 @@ const AppNavigator = () => (
     />
     <Tab.Screen
       name={routes.ACCOUNT}
-      component={AccountScreen}
+      component={AccountNavigator}
       options={{
         tabBarLabel: 'Accounts',
         tabBarIcon: ({ color, size }) => <Icon name="account" color={color} size={size} />

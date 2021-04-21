@@ -1,7 +1,7 @@
 import React from 'react';
 import { Subheading, Provider } from 'react-native-paper';
 
-import Dialog from './Dialog';
+import Dialog from './dialog';
 
 const ReviewForm = ({ visible, hideDialog }) => {
   return (
