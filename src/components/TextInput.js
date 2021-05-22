@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, TextInput as _TextInput } from 'react-native';
 import NumberFormat from 'react-number-format';
 import { TextInputMask } from 'react-native-masked-text'
 import { makeStyles } from 'react-native-elements';
 
-import Text from './Text';
+import Subheading from './Subheading';
+import PhoneNumberInput from './PhoneNumberInput';
 
 const TextInput = (props) => {
-  const styles = useStyles();
+  const [clicked, setClicked] = useState(false);
+  const styles = useStyles({ clicked, ...props });
 
   const { label, style, value, onChangeText, isMasked, type, textInputProps, ...restProps } = props;
 
@@ -17,12 +19,9 @@ const TextInput = (props) => {
     let anotherMaskCompProps = {};
 
     if (type === 'cell-phone') {
-      isAnotherMaskComp = true;
-      options = { mask: '*99 99999 99999' };
-      anotherMaskCompProps = {
-        keyboardType: 'numeric',
-        placeholder: '+91 xxxxxx xxxxx'
-      }
+      return (
+        <PhoneNumberInput {...props} />
+      );
     } else if (type === 'aadhaar') {
       isAnotherMaskComp = true;
       options = { mask: '9999 9999 9999' };
@@ -35,7 +34,7 @@ const TextInput = (props) => {
     if (isAnotherMaskComp) {
       return (
         <View>
-          <Text>{label}</Text>
+          <Subheading>{label}</Subheading>
           <TextInputMask
             type={'custom'}
             options={options}
@@ -51,7 +50,7 @@ const TextInput = (props) => {
 
     return (
       <View>
-        <Text>{label}</Text>
+        <Subheading>{label}</Subheading>
         <NumberFormat
           displayType="text"
           value={value}
@@ -70,34 +69,29 @@ const TextInput = (props) => {
     );
   }
 
-  if (label) {
-    return (
-      <View>
-        <Text>{label}</Text>
-        <_TextInput
-          style={[styles.input, style]}
-          value={value}
-          onChangeText={onChangeText}
-          {...restProps}
-        />
-      </View>
-    );
-  }
-
   return (
-    <_TextInput
-      style={[styles.input, style]}
-      value={value}
-      onChangeText={onChangeText}
-      {...restProps}
-    />
+    <View>
+      {label ? <Subheading>{label}</Subheading> : null}
+      <_TextInput
+        style={[styles.input, style]}
+        value={value}
+        onChangeText={onChangeText}
+        onFocus={() => setClicked(true)}
+        onEndEditing={() => setClicked(false)}
+        onSubmitEditing={() => setClicked(false)}
+        {...restProps}
+      />
+    </View>
   );
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme, props) => ({
   input: {
-    borderBottomWidth: 1,
-    height: 40,
+    backgroundColor: theme.colors.backgroundDark,
+    height:  50,
+    padding: 10,
+    borderBottomWidth: 2,
+    borderBottomColor: props.clicked ? theme.colors.primary : theme.colors.backgroundDarker,
     fontSize: theme.Text.style.fontSize,
   },
 }));

@@ -1,14 +1,15 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Headline } from 'react-native-paper';
-import { makeStyles } from 'react-native-elements';
+
+import Heading from '../Heading';
+import { makeStyles } from '../../hoc';
 
 const FormHeadline = ({ label, children }) => {
   const styles = useStyles();
 
   return (
     <View style={styles.container}>
-      <Headline>{label}</Headline>
+      <Heading>{label}</Heading>
       {children}
     </View>
   );

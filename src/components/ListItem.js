@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableHighlight, Image, View, StyleSheet } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-import theme from '../theme';
+import { theme } from '../config';
 import Text from './Text';
 import Icon from './Icon';
 

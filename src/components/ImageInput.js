@@ -7,7 +7,7 @@ import {
 } from 'expo-image-picker';
 import { makeStyles } from 'react-native-elements';
 
-import theme from '../theme';
+import { theme } from '../config';
 import Icon from './Icon';
 
 const ImageInput = ({ imageUri, onChangeImage, containerStyle }) => {

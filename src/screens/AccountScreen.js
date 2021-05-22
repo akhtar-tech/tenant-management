@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 
 import { ListItem, Icon, Dialog } from '../components';
-import theme from '../theme';
-import { routes } from '../config';
+import { routes, theme } from '../config';
 
 const menuItems = [
   {

@@ -1,17 +1,22 @@
-const fontSize = 18;
+const fontSize = {
+  heading: 24,
+  subheading: 20,
+  normal: 18,
+};
 
 const theme = {
   Text: {
     style: {
-      fontSize,
+      fontSize: fontSize.normal,
     },
   },
   Button: {
     titleStyle: {
-      fontSize,
+      fontSize: fontSize.normal,
     },
   },
 
+  fontSize,
   colors: {
     primary: '#8a4af3',
     secondary: '#fc5c65',
@@ -22,6 +27,8 @@ const theme = {
     dark: '#0c0c0c',
     success: '#63db9b',
     danger: '#ff5252',
+    backgroundDark: '#ebebeb',
+    backgroundDarker: '#e0e0e0',
   },
 };
 
