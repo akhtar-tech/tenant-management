@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme, props) => ({
     alignItems: 'center',
     overflow: 'hidden',
     borderBottomWidth: 2,
-    borderColor: props.clicked ? theme.colors.primary : theme.colors.backgroundDark,
+    borderColor: props.clicked ? theme.colors.primary : theme.colors.backgroundDarker,
   },
   label: {
     color: props.clicked ? theme.colors.primary : theme.colors.medium,
