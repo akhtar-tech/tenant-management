@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme, props) => ({
     padding: 10,
     alignItems: 'center',
     overflow: 'hidden',
-    borderBottomWidth: 1,
+    borderBottomWidth: 2,
     borderColor: props.clicked ? theme.colors.primary : theme.colors.backgroundDark,
   },
   label: {
