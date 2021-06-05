@@ -5,8 +5,10 @@ import { makeStyles } from 'react-native-elements';
 const Divider = (props) => {
   const styles = useStyles(props);
 
+  const { style } = props;
+
   return (
-    <View style={styles.container} />
+    <View style={[styles.container, style]} />
   );
 };
 

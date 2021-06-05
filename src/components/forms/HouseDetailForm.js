@@ -16,6 +16,7 @@ const HouseDetailForm = () => (
       maxLength={255}
       name="address"
       label="Address"
+      placeholder="Where is your house?"
     />
   </FormHeadline>
 );

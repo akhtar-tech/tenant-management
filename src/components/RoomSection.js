@@ -4,8 +4,8 @@ import { View, StyleSheet } from 'react-native';
 import Text from './Text';
 import Icon from './Icon';
 
-const RoomSection = ({ label, children, onClickEdit }) => (
-  <View style={styles.container}>
+const RoomSection = ({ label, containerStyle, children, onClickEdit }) => (
+  <View style={[styles.container, containerStyle]}>
     <View style={styles.header}>
       <Text>{label}</Text>
       <Icon name="square-edit-outline" color="black" onPress={onClickEdit} />

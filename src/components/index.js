@@ -21,3 +21,8 @@ export { default as ReviewForm } from './ReviewForm';
 export { default as ListItem } from './ListItem';
 export { default as ListItemSeparator } from './ListItemSeparator';
 export { default as ListItemDeleteActions } from './ListItemDeleteActions';
+export { default as Switch } from './Switch';
+export { default as TextArea } from './TextArea';
+export { default as AddRoomDialog } from './AddRoomDialog';
+export { default as NumericInput } from './NumericInput';
+export { default as Heading } from './Heading';

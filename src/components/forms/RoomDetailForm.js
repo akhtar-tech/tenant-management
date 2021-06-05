@@ -9,6 +9,8 @@ import FormDropDown from './FormDropDown';
 import FormSwitch from './FormSwitch';
 import TenantDetailForm from './TenantDetailForm';
 import Icon from '../Icon';
+import Button from '../Button';
+import { theme } from '../../config';
 
 const amenities = [
   { label: 'Electricity', value: 'electricity', icon: () => <Icon name="lightning-bolt" color="black" />, textStyle: { alignSelf: 'center' } },
@@ -23,13 +25,14 @@ const RoomDetailForm = () => {
   const { values } = useFormikContext();
 
   return (
-    <FormHeadline label="Room Details">
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+    <View style={{ padding: 10 }}>
+      {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}> */}
         <FormRoomSizeInput
-          name="roomSize"
+          name={{
+            height: 'roomHeight',
+            width: 'roomWidth',
+          }}
           label="Room size"
-          format="##*##"
-          mask="_"
         />
         <FormDropDown
           label="Amenities"
@@ -38,16 +41,16 @@ const RoomDetailForm = () => {
           width={200}
           items={amenities}
         />
-      </View>
+      {/* </View> */}
       <FormField
         maxLength={255}
         name="roomName"
         label="Room Name (optional)"
       />
-      <FormSwitch label="Do you want to add tenant information?" name="shouldAddTenant" />
+      <FormSwitch label="Do you want to add tenant detail?" name="shouldAddTenant" />
 
       {values.shouldAddTenant ? <TenantDetailForm /> : null}
-    </FormHeadline>
+    </View>
   );
 }
 

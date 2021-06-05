@@ -1,11 +1,13 @@
 import React from 'react';
-import { Subheading, Button, Dialog as _Dialog } from 'react-native-paper';
+import { Button, Dialog as _Dialog } from 'react-native-paper';
+
+import { theme } from '../../config';
 
 const ActionDialog = ({
   visible,
   hideDialog,
   title,
-  content,
+  children,
   button: {
     primary,
     secondary,
@@ -14,13 +16,13 @@ const ActionDialog = ({
   <_Dialog visible={visible} onDismiss={hideDialog}>
     <_Dialog.Title>{title}</_Dialog.Title>
     <_Dialog.Content>
-      <Subheading>{content}</Subheading>
+      {children}
     </_Dialog.Content>
     <_Dialog.Actions>
       <Button
         onPress={secondary.onPress}
         uppercase={false}
-        color="black"
+        color={secondary.color || theme.colors.dark}
         labelStyle={{ fontSize: 18 }}
       >
         {secondary.label}
@@ -28,7 +30,7 @@ const ActionDialog = ({
       <Button
         onPress={primary.onPress}
         uppercase={false}
-        color="#f26868"
+        color={primary.color || theme.colors.primary}
         labelStyle={{ fontSize: 18 }}
       >
         {primary.label}

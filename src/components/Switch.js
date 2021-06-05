@@ -1,7 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Switch as _Switch, Subheading } from 'react-native-paper';
+import { Switch as _Switch } from 'react-native-paper';
 import { makeStyles } from 'react-native-elements';
+
+import Subheading from './Subheading';
 
 const Switch = (props) => {
   const styles = useStyles();
@@ -24,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    flexWrap: 'wrap',
   },
   primary: { color: theme.colors.primary },
 }));
