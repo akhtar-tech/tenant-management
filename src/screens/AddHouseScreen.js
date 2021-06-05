@@ -17,39 +17,63 @@ import {
 } from '../components';
 import { theme } from '../config';
 
-const validationSchema = Yup.object().shape({
-  houseName: Yup.string().label('House name'),
-  address: Yup.string().required().min(1).label('Address'),
-  roomSize: Yup.string().required().min(3).label('Room size'),
-  amenities: Yup.array().required().min(2).label('Amenities'),
-});
-
-const initialValues = {
+const houseInitialValues = {
   houseName: '',
   address: '',
-  // roomNo: '1',
-  // room: [],
-  // roomSize: '',
-  // roomName: '',
-  // amenities: ['electricity', 'water'],
-  // mobile: '',
-  // shouldAddTenant: true,
-  // aadhaarNo: '',
-  // aadhaarImageUris: ['', ''],
-  // noOfTenant: '1',
 };
+
+const houseValidationSchema = Yup.object().shape({
+  houseName: Yup.string().label('House name'),
+  address: Yup.string().required().min(1).label('Address'),
+});
+
+const roomInitialValues = {
+  roomHeight: '',
+  roomWidth: '',
+  amenities: ['electricity', 'water'],
+  roomName: '',
+  shouldAddTenant: true,
+  tenantName: '',
+  noOfTenant: '1',
+  mobile: '',
+  aadhaarNo: '',
+  aadhaarImageUris: ['', ''],
+};
+
+const roomValidationSchema = Yup.object().shape({
+  roomHeight: Yup.string().required().min(1).max(2).label('Room height size'),
+  roomWidth: Yup.string().required().min(1).max(2).label('Room width size'),
+  amenities: Yup.array().required().min(2).label('Amenities'),
+  roomName: Yup.string().label('Room name'),
+  shouldAddTenant: Yup.bool().required(),
+  tenantName: Yup.string().label('Tenant name').when('shouldAddTenant', {
+    is: true,
+    then: (d) => d.min(3).required()
+  }),
+  noOfTenant: Yup.string().label('No of tenants').when('shouldAddTenant', {
+    is: true,
+    then: (d) => d.min(1).required()
+  }),
+  mobile: Yup.string().label('Mobile').when('shouldAddTenant', {
+    is: true,
+    then: (d) => d.min(10).max(10).required()
+  }),
+  aadhaarNo: Yup.string().label('Aadhaar no').when('shouldAddTenant', {
+    is: true,
+    then: (d) => d.min(12).max(12).required()
+  }),
+});
 
 const AddHouseScreen = () => {
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [roomsInformation, setRoomsInformation] = useState([]);
   const [showAddRoomDialog, setShowAddRoomDialog] = useState(false);
-  console.log('roomInformation =>', roomsInformation);
 
   return (
     <>
       <Form
-        initialValues={initialValues}
-        validationSchema={validationSchema}
+        initialValues={houseInitialValues}
+        validationSchema={houseValidationSchema}
         onSubmit={() => setShowReviewForm(false)}
       >
         <View style={{ height: '100%', justifyContent: 'space-between' }}>
@@ -121,18 +145,8 @@ const AddHouseScreen = () => {
       </Form>
       {showAddRoomDialog ? (
         <Form
-          initialValues={{
-            roomHeight: '',
-            roomWidth: '',
-            roomName: '',
-            amenities: ['electricity', 'water'],
-            shouldAddTenant: true,
-            tenantName: '',
-            noOfTenant: '1',
-            mobile: '',
-            aadhaarNo: '',
-            aadhaarImageUris: ['', ''],
-          }}
+          initialValues={roomInitialValues}
+          validationSchema={roomValidationSchema}
           onSubmit={(newRoomsInformation) => {
             setRoomsInformation([...roomsInformation, newRoomsInformation])
             setShowAddRoomDialog(false);
