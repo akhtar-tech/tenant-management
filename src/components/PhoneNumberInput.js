@@ -54,7 +54,7 @@ const PhoneNumberInput = (props) => {
         <Text>{country.callingCode}</Text>
         <TextInput
           style={[styles.input, style]}
-          value={value}
+          value={formatText[countryCode](value)}
           autoCorrect={false}
           keyboardType="numeric"
           maxLength={11}
@@ -62,7 +62,7 @@ const PhoneNumberInput = (props) => {
           onFocus={() => setClicked(true)}
           onEndEditing={() => setClicked(false)}
           onSubmitEditing={() => setClicked(false)}
-          onChangeText={(text) => onChangeText(formatText[countryCode](text))}
+          onChangeText={(text) => onChangeText(text.split(' ').join(''))}
           {...restProps}
         />
       </View>

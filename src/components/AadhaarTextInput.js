@@ -40,7 +40,7 @@ const AadhaarTextInput = (props) => {
       <View style={[styles.innerContainer]}>
         <TextInput
           style={[styles.input, style]}
-          value={value}
+          value={formatText(value)}
           autoCorrect={false}
           keyboardType="numeric"
           maxLength={14}
@@ -48,7 +48,7 @@ const AadhaarTextInput = (props) => {
           onFocus={() => setClicked(true)}
           onEndEditing={() => setClicked(false)}
           onSubmitEditing={() => setClicked(false)}
-          onChangeText={(text) => onChangeText(formatText(text))}
+          onChangeText={(text) => onChangeText(text.split(' ').join(''))}
           {...restProps}
         />
       </View>

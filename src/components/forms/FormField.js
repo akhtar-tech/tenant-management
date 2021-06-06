@@ -7,6 +7,9 @@ import ErrorMessage from './ErrorMessage';
 
 const FormField = ({ name, ...restProps }) => {
   const { values, errors, touched, setFieldTouched, handleChange } = useFormikContext();
+  if (name === 'mobile') {
+    console.log('==>', values[name]);
+  }
 
   return (
     <View style={{ marginVertical: 5 }}>

@@ -30,7 +30,14 @@ const FormRoomSizeInput = ({ name, label, ...restProps }) => {
           onChangeText={handleChange(name.width)}
         />
       </View>
-      <ErrorMessage error={errors[name]} visible={touched[name]} />
+      <ErrorMessage
+        error={errors[name.height]}
+        visible={touched[name.height]}
+      />
+      <ErrorMessage
+        error={errors[name.width]}
+        visible={touched[name.width]}
+      />
     </View>
   );
 }

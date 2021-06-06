@@ -4,11 +4,18 @@ import { View, StyleSheet } from 'react-native';
 import Text from './Text';
 import Icon from './Icon';
 
-const RoomSection = ({ label, containerStyle, children, onClickEdit }) => (
+const RoomSection = ({ label, containerStyle, children, onClickEdit, isDeleteButton = false, onClickDelete }) => (
   <View style={[styles.container, containerStyle]}>
     <View style={styles.header}>
       <Text>{label}</Text>
-      <Icon name="square-edit-outline" color="black" onPress={onClickEdit} />
+      <View style={{ flexDirection: 'row' }}>
+        <Icon name="square-edit-outline" color="black" onPress={onClickEdit} />
+        {isDeleteButton ? (
+          <View style={{ marginLeft: 10 }}>
+            <Icon name="delete-outline" color="black" onPress={onClickDelete} />
+          </View>
+        ) : null}
+      </View>
     </View>
     <View style={styles.body}>{children}</View>
   </View>

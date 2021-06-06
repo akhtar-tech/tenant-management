@@ -3,6 +3,7 @@ import { View, ScrollView } from 'react-native';
 import * as Yup from 'yup';
 
 import {
+  Dialog,
   RoomSection,
   LabelRow,
   Chip,
@@ -32,7 +33,7 @@ const roomInitialValues = {
   roomWidth: '',
   amenities: ['electricity', 'water'],
   roomName: '',
-  shouldAddTenant: true,
+  shouldAddTenant: false,
   tenantName: '',
   noOfTenant: '1',
   mobile: '',
@@ -68,6 +69,16 @@ const AddHouseScreen = () => {
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [roomsInformation, setRoomsInformation] = useState([]);
   const [showAddRoomDialog, setShowAddRoomDialog] = useState(false);
+  const [showDeleteRoomDialog, setShowDeleteRoomDialog] = useState(false);
+  const [roomId, setRoomId] = useState(null);
+
+  const deleteRoom = (roomIndex) => {
+    const updatedRoomsInformation = roomsInformation.filter((_, index) => index !== roomIndex);
+    setRoomsInformation(updatedRoomsInformation);
+    setRoomId(null);
+  }
+
+  const closeDeleteRoomDialog = () => setShowDeleteRoomDialog(false);
 
   return (
     <>
@@ -96,6 +107,11 @@ const AddHouseScreen = () => {
                     label={`Room ${index + 1}`}
                     key={index}
                     containerStyle={{ margin: 0, marginTop: 15 }}
+                    isDeleteButton
+                    onClickDelete={() => {
+                      setRoomId(index);
+                      setShowDeleteRoomDialog(true);
+                    }}
                   >
                     {(roomInformation.roomHeight && roomInformation.roomWidth) ? (
                       <LabelRow label="Room size:">
@@ -107,30 +123,34 @@ const AddHouseScreen = () => {
                         <Chip text={amenity} key={amenity} />
                       ))}</LabelRow>
                     ) : null}
-                    {(roomInformation.roomName) ? (
-                      <LabelRow label="Room name:">
-                        {roomInformation.roomName}
-                      </LabelRow>
-                    ) : null}
-                    {(roomInformation.tenantName) ? (
-                      <LabelRow label="Tenant name:">
-                        {roomInformation.tenantName}
-                      </LabelRow>
-                    ) : null}
-                    {(roomInformation.noOfTenant) ? (
-                      <LabelRow label="No of tenants:">
-                        {roomInformation.noOfTenant}
-                      </LabelRow>
-                    ) : null}
-                    {(roomInformation.mobile) ? (
-                      <LabelRow label="Mobile:">
-                        {roomInformation.mobile}
-                      </LabelRow>
-                    ) : null}
-                    {(roomInformation.aadhaarNo) ? (
-                      <LabelRow label="Aadhaar:">
-                        {roomInformation.aadhaarNo}
-                      </LabelRow>
+                    {(roomInformation.shouldAddTenant) ? (
+                      <>
+                        {(roomInformation.roomName) ? (
+                          <LabelRow label="Room name:">
+                            {roomInformation.roomName}
+                          </LabelRow>
+                        ) : null}
+                        {(roomInformation.tenantName) ? (
+                          <LabelRow label="Tenant name:">
+                            {roomInformation.tenantName}
+                          </LabelRow>
+                        ) : null}
+                        {(roomInformation.noOfTenant) ? (
+                          <LabelRow label="No of tenants:">
+                            {roomInformation.noOfTenant}
+                          </LabelRow>
+                        ) : null}
+                        {(roomInformation.mobile) ? (
+                          <LabelRow label="Mobile:">
+                            {roomInformation.mobile}
+                          </LabelRow>
+                        ) : null}
+                        {(roomInformation.aadhaarNo) ? (
+                          <LabelRow label="Aadhaar:">
+                            {roomInformation.aadhaarNo}
+                          </LabelRow>
+                        ) : null}
+                      </>
                     ) : null}
                   </RoomSection>
                 ))}
@@ -160,6 +180,16 @@ const AddHouseScreen = () => {
           />
         </Form>
       ) : null}
+      <Dialog provider>
+        <Dialog.Delete
+          visible={showDeleteRoomDialog}
+          hideDialog={closeDeleteRoomDialog}
+          onPressOK={() => {
+            deleteRoom(roomId);
+            closeDeleteRoomDialog();
+          }}
+        />
+      </Dialog>
     </>
   );
 }
